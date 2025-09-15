@@ -1,0 +1,31 @@
+nav {
+    padding: .75rem 3rem;
+    background-color: #000000; /* Purdue Black background */
+    border-bottom: 5px solid #CEB888; /* Old Gold border */
+    box-shadow: 0 2px 8px rgba(206, 184, 136, 0.3); /* subtle gold shadow */
+  }
+  
+  nav ul {
+    display: flex;
+    gap: 4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+  font-weight: 600;
+  }
+  
+  nav ul li a {
+    text-decoration: none;
+    color: #CEB888; /* Old Gold text */
+    transition: color 0.3s ease;
+  }
+  
+  nav ul li a:hover {
+    color: #FFFFFF; /* White on hover for contrast */
+  }
+  body {
+    font-family: 'Montserrat', sans-serif;
+  }
+  

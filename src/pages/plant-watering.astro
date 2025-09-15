@@ -1,0 +1,189 @@
+---
+import Header from "./components/header.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <title>Zarni Win - Mechanical Engineer</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #fefefe;
+        color: #222;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      main {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 2.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h2 {
+        margin-top: 2rem;
+        font-size: 2rem;
+        font-weight: 600;
+        border-bottom: 2px solid #ceb888;
+        padding-bottom: 0.3rem;
+      }
+
+      ul {
+        padding-left: 1.5rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <h1>Automated Plant Watering System</h1>
+      <div style="text-align: center; margin: 2rem 0;">
+        <img 
+          src="/images/plant-main.jpeg" 
+          alt="Diagram of plant watering system"
+          style="max-width: 60%; border-radius: 8px;"
+        />
+      </div>
+
+      <h2>Project Goals</h2>
+      <p>
+        The goal of this project was to design and build a modular, automated watering system
+        using a capacitive soil moisture sensor, Arduino Uno R4 WiFi, and a pump controlled via transistor.
+        It was built to improve water efficiency and plant health while being scalable to future features
+        like mobile app control as well as more modular systems.
+      </p>
+
+      <h2>Parts Used</h2>
+      <ul>
+        <li>Arduino Uno R4 WiFi</li>
+        <li>Mini Breadboard</li>
+        <li>Capacitive Soil Moisture Sensor</li>
+        <li>5V Submersible Pump (180 mA)</li>
+        <li>1N4007 Diode</li>
+        <li>2N2222A Transistor</li>
+        <li>1 kΩ Resistor</li>
+        <li>Silicone Tubing</li>
+        <li>Wires</li>
+      </ul>
+
+      <h2>System Description</h2>
+      <div style="text-align: center; margin: 2rem 0;">
+        <img 
+          src="/images/plant-schematic.png" 
+          alt="Diagram of plant watering system"
+          style="max-width: 90%; border-radius: 8px;"
+        />
+      </div>
+      
+      <p>
+        The Arduino reads analog moisture levels via the capacitive sensor connected to A0. When the soil is dry,
+        it triggers a transistor that activates a small submersible pump to water the plant. 
+        The submersible pump is powered by 5V and controlled through an NPN 2N2222A transistor acting as a 
+        low-side switch. The transistor allows the pump to receive more power. A flyback diode (e.g., 1N4007) is placed across the pump terminals to suppress voltage spikes caused by inductive kickback when the pump is turned off.
+      </p>
+
+      <h2>Sensor Calibration</h2>
+      <div style="text-align: center; margin: 2rem 0;">
+        <img 
+          src="/images/plant-graph.png" 
+          alt="Diagram of plant watering system"
+          style="max-width: 90%; border-radius: 8px;"
+        />
+      </div>
+      <p>
+        To calibrate the sensor, its readings were compared to known volumetric water content (VWC) values by gradually adding water to a fixed volume of soil. After allowing moisture to evenly distribute, sensor values were recorded and mapped to VWC percentages. This enabled a linear approximation usable in real conditions, though accuracy may vary by soil type and compaction.
+      </p>
+      <p>
+      The derived formula was:
+      </p>
+      <p style="font-family: monospace;">
+        VWC (%) = (-0.0019 x SensorValue + 1.14) x 100
+      </p>
+
+      <h2>Code Summary</h2>
+      <div style="text-align: center; margin: 2rem 0;">
+        <img 
+          src="/images/plant-code.png" 
+          alt="Diagram of plant watering system"
+          style="max-width: 90%; border-radius: 8px;"
+        />
+      </div>
+      <p>
+        The Arduino reads the moisture level every 10 seconds, converts it to VWC, and displays it in the Serial Monitor.
+        If moisture is below vwcPercent, which in this case is 25%, it activates the pump for 0.25 seconds. The conversion is handled in a helper function,
+        <code>percentCalc()</code>, allowing easy customization of thresholds and timing.
+      </p>
+
+      <h2>Prototype Learnings</h2>
+      <p>
+        Serial output was critical in tuning the moisture threshold. The capacitive sensor performed well without corroding, and
+        the use of the transistor and flyback diode ensured stable pump control. Future iterations will explore variable-speed
+        watering using PWM.
+      </p>
+
+      <h2>Future Expansion</h2>
+      <ul>
+        <li>Modular casing (for Arduino, pump, sensor)</li>
+        <div
+  style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    justify-items: center;
+    margin: 2rem 0;
+  "
+>
+  <figure style="text-align: center;">
+    <img
+      src="/images/plant-model1.png"
+      alt="Modular Plant Casing Design"
+      style="max-width: 60%; border-radius: 8px;"
+    />
+    <figcaption style="font-size: 0.9rem; color: #555; margin-top: 0.5rem;">
+      Arduino and Wiring Casing Mountable to Pot
+    </figcaption>
+  </figure>
+
+  <figure style="text-align: center;">
+    <img
+      src="/images/plant-model2.png"
+      alt="Water Distribution Tubing"
+      style="max-width: 100%; border-radius: 8px;"
+    />
+    <figcaption style="font-size: 0.9rem; color: #555; margin-top: 0.5rem;">
+      Sensor Casing
+    </figcaption>
+  </figure>
+</div>
+        
+        <li>Multi-plant tubing distribution with optional valves</li>
+        <li>Mobile app with plant-specific watering profiles</li>
+      </ul>
+
+      <p style="margin-top: 2rem; font-style: italic;">
+        Phase II will focus on building a user interface and expanding wireless control features.
+      </p>
+    </main>
+    <footer>&copy; 2025 Zarni Win - Built with Astro</footer>
+  </body>
+</html>

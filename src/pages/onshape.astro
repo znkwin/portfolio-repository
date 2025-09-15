@@ -1,0 +1,232 @@
+---
+import Header from "./components/header.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <title>Collaborative CAD Research – Onshape</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #fefefe;
+        color: #222;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      main {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 2.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h2 {
+        margin-top: 2.5rem;
+        font-size: 2rem;
+        font-weight: 600;
+        border-bottom: 2px solid #ceb888;
+        padding-bottom: 0.3rem;
+      }
+
+      p {
+        margin-top: 1rem;
+      }
+
+      ul {
+        padding-left: 1.5rem;
+      }
+
+      figure {
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      figure img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+
+      figcaption {
+        font-size: 0.9rem;
+        color: #555;
+        margin-top: 0.5rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <h1>Collaborative CAD Research Using Onshape</h1>
+      <p>
+        This research project investigated collaborative computer-aided design (CAD) workflows using 
+        <strong>Onshape</strong>, a cloud-native CAD platform. The goal was to explore whether real-time collaboration in shared environments 
+        can improve design efficiency, team communication, and the educational value of modeling.
+      </p>
+
+      <h2>Project Background</h2>
+      <p>
+        Traditional CAD tools like SolidWorks and NX are file-based and single-user focused, requiring manual version 
+        management. In contrast, Onshape offers cloud-native features like document history, branching, and live editing. 
+        Our team tested these features in a semester-long research study, comparing collaborative modeling outcomes with 
+        individual workflows.
+      </p>
+      <p>
+        This research was done with four student researchers in collaboration with a representative from Onshape as well as Professor Greg Jensen and Professor Jason Elliot.
+      </p>
+
+      <h2>Research Objectives</h2>
+      <ul>
+        <li>Simulate industry-style collaborative CAD workflows using Onshape</li>
+        <li>Measure differences in efficiency, speed, and part quality across workflows</li>
+        <li>Identify useful features and limitations of browser-based modeling</li>
+        <li>Gain hands-on experience with multi-user Part Studios and shared assemblies</li>
+      </ul>
+
+      <h2>Learning Onshape | Setup & Team Structure</h2>
+      <p>
+        The team was divided into pairs working on a shared mechanical system: the <strong>Panther Pup Engine</strong>. 
+        Each person focused on different subcomponents while collaborating in real time. Communication was done through 
+        Onshape comments, live chat, and periodic meetings. The teams made sure to model together as much as possible, to ensure the "collaborative experience" was fully captured.
+      </p>
+      <!-- TODO: Add roles — who worked on what part? Gears, housing, pistons, etc.? -->
+
+      <figure>
+        <img src="/images/pantherpup.png" alt="Panther Pup Assembly Placeholder" />
+        <figcaption>Panther Pup Engine | Main collaborative test model</figcaption>
+      </figure>
+
+      <h2>Tools & Features Used</h2>
+      <ul>
+        <li><strong>Part Studios:</strong> Simultaneous part design across users</li>
+        <li><strong>Assembly Studio:</strong> Linked parts into movable mechanical groups</li>
+        <li><strong>In-context Editing:</strong> Sketched features based on existing assemblies</li>
+        <li><strong>Variables Studio:</strong> Controlled shared parameters for scaling and references</li>
+        <li><strong>Branching:</strong> Created parallel ideas and merged clean versions</li>
+        <li><strong>Comment Threads:</strong> Left feedback and marked requested changes</li>
+      </ul>
+
+      <h2>Live Collaboration in Practice</h2>
+      <p>
+        In real-time modeling sessions, team members edited Part Studios simultaneously. This allowed faster iteration, 
+        but required careful coordination to avoid conflicts (e.g. overlapping sketches or edits to the same feature).
+      </p>
+      <!-- TODO: Insert example — did a feature accidentally break someone else's geometry? -->
+
+      <figure>
+        <div style="display: flex; justify-content: center; margin: 2rem 0;">
+          <video
+            src="/videos/collabModel.mp4"
+            controls
+            style="max-width: 90%; border-radius: 8px;"
+          ></video>
+        </div>
+        <figcaption>Live collaborative modeling session</figcaption>
+      </figure>
+
+      <h2>Case Study: Grinder Vise Model-Off</h2>
+      <p>
+        To measure time savings, the team held a "model-off" challenge. The same part, a <strong>grinder vise</strong>, 
+        was modeled by an individual and then collaboratively. Both versions were compared for time, accuracy, and workflow breakdown.
+      </p>
+      <ul>
+        <li><strong>Individual time:</strong> ~6 hours total (including planning and constraints)</li>
+        <li><strong>Team time:</strong> ~2.5 hours (3 people modeling simultaneously)</li>
+        <li><strong>Outcome:</strong> Time cut by 59%, with similar model quality</li>
+      </ul>
+
+      <p>
+        The collaborative team finished faster by dividing the part into discrete features, modeling them in parallel, 
+        and combining sketches in a shared studio. However, the total person-hours were slightly higher (~7.5 hours) 
+        than solo modeling.
+      </p>
+
+      <figure>
+        <img src="/images/grinder.png" alt="Model-Off Comparison" />
+        <figcaption>Grinder Vise - Comparison of individual vs collaborative modeling workflow</figcaption>
+      </figure>
+      <p>
+        This shows that time can be reduced when multiple people work on the part, effectively meaning that collaboration can cut down on design hours, but is less effective when it comes to labor hours. This is mainly due to the stepping on each other's feet that occurs when working on something as a team. But many things can be done to try and make workflow as efficient as possible, like planning beforehand and good communication.
+      </p>
+
+      <h2>Final Sprint: Panther Pup v2 Speedrun</h2>
+<p>
+  As a final challenge to wrap up the research, our team decided to recreate the Panther Pup Engine from scratch - but this time with speed and confidence. 
+  Having already built the model once, we treated this second version as a <strong>modeling speedrun</strong>: how quickly could we recreate the essential structure using streamlined workflows?
+</p>
+
+<p>
+  With better familiarity and tool awareness, the team completed the entire model in significantly less time. The second build emphasized part simplification, cleaner sketches, and minimal use of constraints where possible. 
+  This exercise reinforced how much more efficiently collaborative modeling can work when roles are clear and tools are mastered.
+</p>
+
+<figure>
+  <img src="/images/pantherpup2.png" alt="Panther Pup v2 model" />
+  <figcaption>Second Panther Pup Engine | built fast using streamlined modeling and collaboration</figcaption>
+</figure>
+
+<div style="display: flex; justify-content: center; margin: 2rem 0;">
+  <video
+    src="/videos/pantherPup2.mov"
+    controls
+    style="max-width: 90%; border-radius: 8px;"
+  ></video>
+</div>
+<figcaption style="text-align: center; font-size: 0.9rem; color: #555;">
+  Time-lapse: Collaborative speedrun of Panther Pup v2
+</figcaption>
+
+<!-- TODO: Add timing results — how long did it take? How many teammates? What improved from v1? -->
+
+      <h2>Challenges & Limitations</h2>
+      <ul>
+        <li>Drawings are single-user only (no live collab editing)</li>
+        <li>Large assemblies lag on low-bandwidth internet</li>
+        <li>Missing legacy features like origin axes in Part Studios</li>
+        <li>Some users unfamiliar with version control concepts like branching</li>
+      </ul>
+
+      <p>
+        While Onshape has many benefits, learning curve and browser performance were sometimes limiting. Collaboration 
+        required planning, shared naming conventions, and frequent syncing between team members.
+      </p>
+
+      <h2>Reflection</h2>
+      <p>
+        Overall, Onshape enabled fast prototyping and intuitive teamwork. The versioning system made it easy to explore 
+        ideas without overwriting each other's work, and the real-time updates made group sessions productive. 
+        Working in this cloud-native system felt closer to modern software development than traditional CAD modeling.
+      </p>
+      <p>
+        CAD and modeling in general has been an individual task in industry and collaboration in CAD is the next step. Just like many other software that has become more cloud-based like Microsoft products as well as Google products, collaborative CAD has many use cases and can be effective when used efficiently. Learning to model collaboratively is crucial if and when industry starts shifting to collaborative systems like Onshape, like Garmin, Formlabs, and IBM already have.
+      </p>
+      <!-- TODO: Add your personal takeaway — what surprised you most about working this way? -->
+
+      <p style="margin-top: 2rem; font-style: italic;">
+        Onshape proved a powerful platform for collaborative CAD exploration, and this project laid a strong 
+        foundation for future team-based modeling workflows in academic and industry settings.
+      </p>
+    </main>
+
+    <footer>&copy; 2025 Zarni Win - Built with Astro</footer>
+  </body>
+</html>

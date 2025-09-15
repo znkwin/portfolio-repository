@@ -1,0 +1,360 @@
+---
+import Header from "./components/header.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+  <head>
+    <title>Audio Equalizer Project</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif;
+        background-color: #fefefe;
+        color: #222;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+      }
+
+      main {
+        max-width: 900px;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+      }
+
+      h1 {
+        font-family: "Oswald", sans-serif;
+        font-size: 2.75rem;
+        margin-bottom: 0.5rem;
+      }
+
+      h2 {
+        margin-top: 2.5rem;
+        font-size: 2rem;
+        font-weight: 600;
+        border-bottom: 2px solid #ceb888;
+        padding-bottom: 0.3rem;
+      }
+
+      p {
+        margin-top: 1rem;
+      }
+
+      ul {
+        padding-left: 1.5rem;
+      }
+
+      figure {
+        text-align: center;
+        margin: 2rem 0;
+      }
+
+      figure img {
+        max-width: 100%;
+        border-radius: 8px;
+      }
+
+      figcaption {
+        font-size: 0.9rem;
+        color: #555;
+        margin-top: 0.5rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: #777;
+      }
+    </style>
+  </head>
+
+  <body>
+    <Header />
+    <main>
+      <h1>Audio Equalizer</h1>
+      <p>
+        This ECE20007 final project focused on designing and building a fully functional analog audio equalizer
+        capable of independently adjusting low, mid, and high-frequency bands within an audio signal. The circuit
+        features a combination of passive and active filters, buffer stages, volume control using op-amps, and a power
+        amplifier using the LM386. The processed signal is recombined and output through a speaker, enabling a real-time
+        demonstration of frequency filtering and gain control.
+      </p>
+
+      <h2>Project Objectives</h2>
+      <p>
+        Beyond basic circuit design, the project emphasized experimental thinking, data analysis, and clear communication
+        of technical results. It strengthened analog design skills and helped simulate real-world engineering processes
+        like presenting performance justifications, refining signal paths, and interpreting measurement data using
+        oscilloscopes and frequency response analysis (FRA).
+      </p>
+
+      <h2>Applications of Audio Equalizers</h2>
+      <p>
+        Equalizers are used in consumer audio (phones, car systems, speakers), pro audio (mixing boards, venues),
+        and even in communication systems. By controlling frequency bands, they enhance clarity, compensate for room
+        acoustics or hardware imperfections, and enable users to shape sound based on context or preference.
+      </p>
+
+      <h2>Theory: Filters</h2>
+      <p>
+        The equalizer used three core filter types:
+      </p>
+      <ul>
+        <li><strong>Low-pass filter</strong>: allows frequencies below 320 Hz</li>
+        <div style="text-align: center; margin: 2rem 0;">
+            <img 
+              src="/images/audio-lowpass.png" 
+              alt="Low Pass Filter"
+              style="max-width: 60%; border-radius: 8px;"
+            />
+          </div>
+        <li><strong>High-pass filter</strong>: allows frequencies above 3.2 kHz</li>
+        <div style="text-align: center; margin: 2rem 0;">
+            <img 
+              src="/images/audio-highpass.png" 
+              alt="High Pass Filter"
+              style="max-width: 60%; border-radius: 8px;"
+            />
+          </div>
+        <li><strong>Mid-band filter</strong>: passes frequencies between ~320 Hz and 3.2 kHz</li>
+        <div style="text-align: center; margin: 2rem 0;">
+            <img 
+              src="/images/audio-midpass.png" 
+              alt="Mid Pass Filter"
+              style="max-width: 60%; border-radius: 8px;"
+            />
+        </div>
+      </ul>
+      <p>
+        All filters were implemented using RC configurations. Cutoff frequency was calculated by:
+      </p>
+      <p style="font-family: monospace;">
+        f = 1 / (2piRC)
+      </p>
+      <p>
+        For the low-pass filter: R = 4970 ohms and C = 0.1 microFarads, giving f = 320 Hz<br />
+        For the high-pass filter: R = 497 ohms and C = 0.1 microFarads, giving f = 3200 Hz<br />
+        For the mid-band filter: high-pass and low-pass cascaded with a buffer to isolate impedance effects.
+      </p>
+
+      <h2>Theory: Operational Amplifiers</h2>
+      <div style="text-align: center; margin: 2rem 0;">
+        <img 
+          src="/images/audio-opamp.png" 
+          alt="Op-Amp"
+          style="max-width: 80%; border-radius: 8px;"
+        />
+    </div>
+      <p>
+        Op-amps were used to adjust volume by controlling gain via the formula:
+      </p>
+      <p style="font-family: monospace;">
+        Gain = -R2 / R1
+      </p>
+      <p>
+        A 10kOhm potentiometer was used for R2 with a fixed 10kOhm R1, allowing smooth gain adjustment from 0 (mute) to 1
+        (full volume). Each frequency band had its own volume control. A final op-amp was used to recombine signals and
+        control total circuit output gain before sending it to the speaker.
+      </p>
+
+      <h2>Theory: Power Amplifier</h2>
+      <div style="text-align: center; margin: 2rem 0;">
+        <img 
+          src="/images/audio-power.png" 
+          alt="Power-Amp"
+          style="max-width: 80%; border-radius: 8px;"
+        />
+    </div>
+      <p>
+        Since op-amps alone can't deliver enough current to drive a speaker, a power amplification stage was added using
+        the LM386. With a measured RMS voltage of 4.81 V into an 8 ohm load, the final stage delivered:
+      </p>
+      <p style="font-family: monospace;">
+        Power = V^2 / R = (4.81)^2 / 8 = 2.89 W
+      </p>
+      <p>
+        This exceeded the requirement of 400 mW and confirmed the output stage was successful.
+      </p>
+
+      <h2>Volume Control & Signal Recombination</h2>
+      <p>
+        Each band passed through a dedicated op-amp volume stage, followed by recombination using a summing amplifier:
+      </p>
+      <p style="font-family: monospace;">
+        Vout = -[ (Rf/R1)V1 + (Rf/R2)V2 + (Rf/R3)V3 ]
+      </p>
+      <p>
+        Matching all R inputs and Rf values ensured balanced mixing. A final potentiometer was used to control overall
+        loudness after recombination.
+      </p>
+      <h2>System Schematic</h2>
+      <div style="text-align: center; margin: 2rem 0;">
+        <img 
+          src="/images/audio-schem.png" 
+          alt="Full Schematic-Audio Equalizer"
+          style="max-width: 90%; border-radius: 8px;"
+        />
+    </div>
+      <p>
+        The final schematic includes:
+      </p>
+      <ul>
+        <li>3 filter stages (low, mid, high)</li>
+        <li>3 buffer stages to isolate filters</li>
+        <li>3 volume control op-amps (one per band)</li>
+        <li>Summing amplifier for recombination</li>
+        <li>Master volume stage</li>
+        <li>LM386 power amplifier</li>
+      </ul>
+
+
+      <h2>Testing & Results</h2>
+      <p>
+        Testing was done using a function generator and oscilloscope. Cutoff frequencies were verified with FRA, and
+        signal amplitudes were measured to ensure they met design targets. The speaker output was tested by playing
+        tones and listening for frequency separation. Graphs of the FRAs and the oscilliscope readings through music can be seen below.
+      </p>
+      <ul>
+        <li><strong>Cutoff frequencies:</strong> Within 1.2% of theoretical values</li>
+        <li><strong>Low volume mode:</strong> Output below 15 mVrms (as required)</li>
+        <li><strong>High volume mode:</strong> Output ~100 mVrms, under 10% error</li>
+        <li><strong>Ripple:</strong> Measured 21.2 mVrms - slightly above 15 mV target</li>
+      </ul>
+      <div
+  style="
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  "
+>
+  <figure>
+    <img
+      src="/images/audio-lowpassfra.png"
+      alt="Low Pass FRA"
+      style="max-width: 100%; border-radius: 8px;"
+    />
+    <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
+      Low Pass Filter FRA
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img
+      src="/images/audio-midpassfra.png"
+      alt="Mid Pass FRA"
+      style="max-width: 100%; border-radius: 8px;"
+    />
+    <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
+      Mid Pass Filter FRA
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img
+      src="/images/audio-highpassfra.png"
+      alt="High Pass FRA"
+      style="max-width: 100%; border-radius: 8px;"
+    />
+    <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
+      High Pass Filter FRA
+    </figcaption>
+  </figure>
+</div>
+<div
+  style="
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+    text-align: center;
+  "
+>
+  <figure>
+    <img
+      src="/images/audio-lowpassmusic.png"
+      alt="Low Pass with Music"
+      style="max-width: 100%; border-radius: 8px;"
+    />
+    <figcaption style="margin-top: 1.2rem; font-size: 0.9rem; color: #555;">
+      Music filtered with Low Pass
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img
+      src="/images/audio-midpassmusic.png"
+      alt="Mid Pass with Music"
+      style="max-width: 100%; border-radius: 8px;"
+    />
+    <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
+      Music Filtered with Mid Pass
+    </figcaption>
+  </figure>
+
+  <figure>
+    <img
+      src="/images/audio-highpassmusic.png"
+      alt="High Pass with Music"
+      style="max-width: 100%; border-radius: 8px;"
+    />
+    <figcaption style="margin-top: 0.5rem; font-size: 0.9rem; color: #555;">
+      Music Filtered with High Pass
+    </figcaption>
+  </figure>
+</div>
+
+
+      <h2>Ripple Explanation</h2>
+      <p>
+        Ripple refers to the peak-to-peak noise seen on the output waveform. It is often introduced by op-amp
+        imperfections, interference from power sources, or weak decoupling. In this circuit, ripple was likely due to
+        shared breadboard power and load instability. Adding bypass capacitors or shielded layout would reduce it in
+        future versions.
+      </p>
+
+      <h2>Mini Demo</h2>
+      <div style="display: flex; justify-content: center; margin: 2rem 0;">
+        <video
+          src="/videos/audio-demo.MOV"
+          controls
+          style="max-width: 30%; border-radius: 8px;"
+        ></video>
+      </div>
+
+      <h2>Reflection</h2>
+      <p>
+        This project was a strong application of analog theory into a functional, tangible system. It reinforced the
+        value of filtering fundamentals, op-amp math, and careful prototyping. The use of FRA tools and testing under
+        constraints mimicked a real-world EE design flow.
+      </p>
+      <p>
+        In retrospect, improvements would include using a PCB to reduce noise, tuning midband range more precisely, and
+        testing real audio inputs like music or speech. Nevertheless, the project met all core requirements and
+        performed consistently across different audio tests.
+      </p>
+
+      <h2>Future Improvements</h2>
+      <ul>
+        <li>Use digital volume control for programmable equalization</li>
+        <li>Integrate Bluetooth input module</li>
+        <li>Build an enclosure for portability and shielding</li>
+        <li>Use SPICE or LTspice simulations for validation before prototyping</li>
+      </ul>
+
+      <p style="margin-top: 2rem; font-style: italic;">
+        Overall, the audio equalizer was a rewarding project that turned theory into a hands-on system with practical
+        relevance and real-world design challenges.
+      </p>
+    </main>
+
+    <footer>&copy; 2025 Zarni Win - Built with Astro</footer>
+  </body>
+</html>
+

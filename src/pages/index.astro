@@ -1,0 +1,149 @@
+---
+import Header from "./components/header.astro";
+import "../styles/global.css";
+---
+
+<html lang="en">
+	<head>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="/src/styles/global.css" />
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Zarni Win - Mechanical Engineer</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+			rel="stylesheet"
+		/>
+
+		<style>
+			body {
+				font-family: "Montserrat", sans-serif;
+				margin: 0;
+				background-color: #fefefe;
+				color: #222;
+			}
+
+			header {
+				background-color: #ceb888; /* Purdue Old Gold */
+				padding: 2rem;
+				text-align: center;
+			}
+
+			header h1 {
+				margin: 0;
+				font-size: 3rem;
+			}
+
+			header p {
+				font-size: 1.25rem;
+				margin-top: 0.5rem;
+			}
+
+			.section {
+				padding: 3rem 2rem;
+				max-width: 1000px;
+				margin: 0 auto;
+			}
+
+			.project-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+				gap: 2rem;
+			}
+
+			.card {
+				background: white;
+				border: 1px solid #ceb888;
+				border-radius: 10px;
+				padding: 1.5rem;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+				text-decoration: none;
+				color: inherit;
+				transition: transform 0.2s;
+			}
+
+			.card:hover {
+				transform: scale(1.02);
+			}
+
+			.card h2 {
+				margin-top: 0;
+				font-size: 1.5rem;
+			}
+
+			footer {
+				text-align: center;
+				padding: 2rem;
+				font-size: 0.9rem;
+				color: #777;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<header>
+			<h1>Zarni Win</h1>
+			<p>Mechanical Engineering @ Purdue | Builder | Problem-Solver</p>
+		</header>
+
+		<main class="section">
+			<h2 style="font-size: 2.25rem;">Projects</h2>
+			<div class="project-grid">
+				<a href="/plant-watering" class="card">
+					<h2>Plant Watering System</h2>
+					<div style="text-align: center; margin: 2rem 0;">
+						<img 
+						  src="/images/plant-main.jpeg" 
+						  alt="Diagram of plant watering system"
+						  style="max-width: 90%; border-radius: 8px;"
+						/>
+					  </div>
+					<p>
+						Arduino-powered system to monitor and water plants
+						automatically.
+					</p>
+				</a>
+
+				<a href="/audio-equalizer" class="card">
+					<h2>Audio Equalizer</h2>
+					<div style="text-align: center; margin: 2rem 0;">
+						<img 
+						  src="/images/audio-schem-crop.png" 
+						  alt="Schematic-Audio Equalizer"
+						  style="max-width: 90%; border-radius: 8px;"
+						/>
+					</div>
+					<p>
+						Analog audio equalizer with adjustable low, mid, and high-frequency bands using op-amps and filters.
+					</p>
+				</a>
+				<a href="/onshape" class="card">
+					<h2>Onshape Research</h2>
+					<div style="text-align: center; margin: 2rem 0;">
+						<img
+						  src="/images/pantherpup.png" 
+						  alt="Panther Pup"
+						  style="max-width: 90%; border-radius: 8px;"
+						/>
+					</div>
+					<p>
+						Explored cloud-native CAD collaboration using Onshape, building assemblies like the Panther Pup engine with live multi-user workflows.
+					</p>
+				</a>
+
+				<!-- Add more project cards here -->
+			</div>
+		</main>
+
+		<footer>&copy; 2025 Zarni Win — Built with Astro</footer>
+	</body>
+</html>
